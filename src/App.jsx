@@ -240,7 +240,7 @@ export default function App() {
   return (
     <div className="app">
       <header>
-        <h1>📄 Subscription Analyzer</h1>
+        <h1>📄 Subscription a</h1>
         <p className="subtitle">
           Upload your CSV bank export (with headers). We'll detect subscriptions automatically.
         </p>
