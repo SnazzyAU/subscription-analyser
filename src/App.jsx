@@ -240,7 +240,7 @@ export default function App() {
   return (
     <div className="app">
       <header>
-        <h1>📄 Subscription test</h1>
+        <h1>📄 Subscription Analyzer</h1>
         <p className="subtitle">
           Upload your CSV bank export (with headers). We'll detect subscriptions automatically.
         </p>
@@ -254,32 +254,44 @@ export default function App() {
       </div>
 
       {transactions.length > 0 && (
-        <div className="button-row">
-          <button className="clear-button" onClick={clearResults}>🗑️ Clear Results</button>
-        </div>
-      )}
+        <>
+          <div className="tabs">
+            <button
+              className={activeTab === "analysis" ? "active-tab" : ""}
+              onClick={() => setActiveTab("analysis")}
+            >
+              📊 Analysis
+            </button>
+            <button
+              className={activeTab === "planner" ? "active-tab" : ""}
+              onClick={() => setActiveTab("planner")}
+            >
+              ✂️ Cancel Planner
+            </button>
+            <button
+              className={activeTab === "export" ? "active-tab" : ""}
+              onClick={() => setActiveTab("export")}
+            >
+              📋 Export
+            </button>
+          </div>
 
-      {transactions.length > 0 && (
-        <div className="tabs">
-          <button
-            className={activeTab === "analysis" ? "active-tab" : ""}
-            onClick={() => setActiveTab("analysis")}
-          >
-            📊 Analysis
-          </button>
-          <button
-            className={activeTab === "planner" ? "active-tab" : ""}
-            onClick={() => setActiveTab("planner")}
-          >
-            ✂️ Cancel Planner
-          </button>
-          <button
-            className={activeTab === "export" ? "active-tab" : ""}
-            onClick={() => setActiveTab("export")}
-          >
-            📋 Export
-          </button>
-        </div>
+          {activeTab === "analysis" && (
+            <div className="filter-section">
+              <label htmlFor="category-select">Category:</label>
+              <select
+                id="category-select"
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+              >
+                <option value="All">All</option>
+                {Object.keys(SERVICE_CATEGORIES).map((category) => (
+                  <option key={category} value={category}>{category}</option>
+                ))}
+              </select>
+            </div>
+          )}
+        </>
       )}
 
       {loading && <div className="status loading">🔎 Parsing CSV... please wait.</div>}
@@ -333,7 +345,6 @@ export default function App() {
               <h2>📋 Export Subscriptions</h2>
               <p>Export your detected subscriptions and estimated monthly fees to CSV for budgeting or sharing.</p>
               <button className="export-button" onClick={downloadCSV}>⬇️ Download CSV</button>
-
               {cancelOptions.length > 0 && (
                 <div className="export-preview">
                   <h3>📌 Preview:</h3>
@@ -355,7 +366,6 @@ export default function App() {
                   </table>
                 </div>
               )}
-
               {cancelOptions.length === 0 && (
                 <p>No estimated monthly fees available yet. Try uploading a CSV first.</p>
               )}
