@@ -384,8 +384,8 @@ export default function App() {
       </div>
 
       <div className="sidebar right">
-        <AdsenseAd slot="YOUR_RIGHT_SLOT_ID_1" />
-        <AdsenseAd slot="YOUR_RIGHT_SLOT_ID_2" />
+        <AdsenseAd slot="5541416303" />
+        <AdsenseAd slot="2446116151" />
       </div>
     </div>
   );
