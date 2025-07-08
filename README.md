@@ -2,6 +2,8 @@
 
 A simple React app to help users **detect, analyze, plan, and export** their recurring subscription payments based on bank CSV exports.
 
+https://subscriptionanalyser.netlify.app/
+
 ---
 
 ## 🚀 Features
