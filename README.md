@@ -1,12 +1,26 @@
-# React + Vite
+📄 Subscription Analyzer
+A simple React app to help users detect, analyze, plan, and export their recurring subscription payments based on bank CSV exports.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+🚀 Features
+✅ Upload CSV bank exports
+✅ Auto-detect known subscription payments
+✅ Group by service with likely monthly fees
+✅ ⭐ Mark favorites / must-keeps
+✅ ✂️ Cancel Planner to calculate potential savings
+✅ 📋 Export estimated monthly fees to CSV
+✅ Category filtering (Streaming, Internet, Shopping, Music)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🎯 How It Works
+Upload your bank's CSV export.
 
-## Expanding the ESLint configuration
+The app parses transactions and identifies known subscriptions.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+It estimates likely monthly fees based on repeated charges.
+
+Filter by category, mark favorites you want to keep.
+
+Use the Cancel Planner tab to simulate savings.
+
+Export your planned cancellations to a CSV for budgeting.
+
