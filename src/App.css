@@ -339,3 +339,24 @@ footer {
   margin-left: auto;
   margin-right: auto;
 }
+
+.app-layout {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.sidebar {
+  width: 180px;
+  padding: 10px;
+}
+
+.sidebar .adsbygoogle {
+  margin-bottom: 20px;
+}
+
+.main-content {
+  flex: 1;
+  max-width: 1000px;
+  padding: 20px;
+}

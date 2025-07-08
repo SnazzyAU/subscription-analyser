@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import AdsenseAd from "./components/AdsenseAd";  // ✅ import your ad component
 
 const SUBSCRIPTION_KEYWORDS = [
   "netflix", "prime video", "amznprimeau", "kogan mobile", "belong",
@@ -238,151 +239,154 @@ export default function App() {
   };
 
   return (
-    <div className="app">
-      <header>
-        <h1>📄 Subscription Analyzer</h1>
-        <p className="subtitle">
-          Upload your CSV bank export (with headers). We'll detect subscriptions automatically.
-        </p>
-      </header>
-
-      <div className="upload-section">
-        <label className="file-label">
-          📎 Choose CSV File
-          <input type="file" accept=".csv,text/csv" onChange={handleFileUpload} />
-        </label>
+    <div className="app-layout">
+      <div className="sidebar left">
+        <AdsenseAd slot="YOUR_LEFT_SLOT_ID_1" />
+        <AdsenseAd slot="YOUR_LEFT_SLOT_ID_2" />
       </div>
 
-      {transactions.length > 0 && (
-        <>
-          <div className="tabs">
-            <button
-              className={activeTab === "analysis" ? "active-tab" : ""}
-              onClick={() => setActiveTab("analysis")}
-            >
-              📊 Analysis
-            </button>
-            <button
-              className={activeTab === "planner" ? "active-tab" : ""}
-              onClick={() => setActiveTab("planner")}
-            >
-              ✂️ Cancel Planner
-            </button>
-            <button
-              className={activeTab === "export" ? "active-tab" : ""}
-              onClick={() => setActiveTab("export")}
-            >
-              📋 Export
-            </button>
-          </div>
+      <div className="main-content">
+        <header>
+          <h1>📄 Subscription Analyzer</h1>
+          <p className="subtitle">
+            Upload your CSV bank export (with headers). We'll detect subscriptions automatically.
+          </p>
+        </header>
 
-          {activeTab === "analysis" && (
-            <div className="filter-section">
-              <label htmlFor="category-select">Category:</label>
-              <select
-                id="category-select"
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-              >
-                <option value="All">All</option>
-                {Object.keys(SERVICE_CATEGORIES).map((category) => (
-                  <option key={category} value={category}>{category}</option>
-                ))}
-              </select>
+        <div className="upload-section">
+          <label className="file-label">
+            📎 Choose CSV File
+            <input type="file" accept=".csv,text/csv" onChange={handleFileUpload} />
+          </label>
+        </div>
+
+        {transactions.length > 0 && (
+          <>
+            <div className="tabs">
+              <button className={activeTab === "analysis" ? "active-tab" : ""} onClick={() => setActiveTab("analysis")}>
+                📊 Analysis
+              </button>
+              <button className={activeTab === "planner" ? "active-tab" : ""} onClick={() => setActiveTab("planner")}>
+                ✂️ Cancel Planner
+              </button>
+              <button className={activeTab === "export" ? "active-tab" : ""} onClick={() => setActiveTab("export")}>
+                📋 Export
+              </button>
             </div>
-          )}
-        </>
-      )}
 
-      {loading && <div className="status loading">🔎 Parsing CSV... please wait.</div>}
-      {error && <div className="status error">{error}</div>}
-
-      {!loading && serviceCards.length > 0 && (
-        <div className="results">
-          {activeTab === "analysis" && (
-            <>
-              <h2>🔔 Subscriptions Found:</h2>
-              <div className="service-grid">{serviceCards}</div>
-              <div className="total">
-                💰 <strong>Grand Total:</strong> ${total.toFixed(2)}
-                <div className="total-monthly-fees">
-                  📌 <strong>Total Monthly Fees (estimated):</strong> ${totalMonthlyFees.toFixed(2)}
-                </div>
+            {activeTab === "analysis" && (
+              <div className="filter-section">
+                <label htmlFor="category-select">Category:</label>
+                <select
+                  id="category-select"
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                >
+                  <option value="All">All</option>
+                  {Object.keys(SERVICE_CATEGORIES).map((category) => (
+                    <option key={category} value={category}>{category}</option>
+                  ))}
+                </select>
               </div>
-            </>
-          )}
+            )}
+          </>
+        )}
 
-          {activeTab === "planner" && (
-            <>
-              <h2>✂️ Cancel Planner</h2>
-              <p>Select services to cancel and see your estimated savings:</p>
-              <div className="cancel-grid">
-                {cancelOptions.map(({ service, monthlyFee }) => (
-                  <div key={service} className="cancel-item">
-                    <label>
-                      <input
-                        type="checkbox"
-                        checked={selectedCancellations.includes(service)}
-                        onChange={() => toggleCancellation(service)}
-                      />
-                      {service} - ${monthlyFee.toFixed(2)}
-                    </label>
+        {loading && <div className="status loading">🔎 Parsing CSV... please wait.</div>}
+        {error && <div className="status error">{error}</div>}
+
+        {!loading && serviceCards.length > 0 && (
+          <div className="results">
+            {activeTab === "analysis" && (
+              <>
+                <h2>🔔 Subscriptions Found:</h2>
+                <div className="service-grid">{serviceCards}</div>
+                <div className="total">
+                  💰 <strong>Grand Total:</strong> ${total.toFixed(2)}
+                  <div className="total-monthly-fees">
+                    📌 <strong>Total Monthly Fees (estimated):</strong> ${totalMonthlyFees.toFixed(2)}
                   </div>
-                ))}
-              </div>
-              <div className="total-savings">
-                📊 <strong>Current Monthly Expense:</strong> ${totalMonthlyFees.toFixed(2)}
-                <br />
-                ✅ <strong>Saved Monthly Expenses:</strong> ${estimatedSavings.toFixed(2)}
-                <br />
-                📅 <strong>Estimated Yearly Savings:</strong> ${estimatedYearlySavings.toFixed(2)}
-              </div>
-            </>
-          )}
-
-          {activeTab === "export" && (
-            <div className="export-tab">
-              <h2>📋 Export Subscriptions</h2>
-              <p>Export your detected subscriptions and estimated monthly fees to CSV for budgeting or sharing.</p>
-              <button className="export-button" onClick={downloadCSV}>⬇️ Download CSV</button>
-              {cancelOptions.length > 0 && (
-                <div className="export-preview">
-                  <h3>📌 Preview:</h3>
-                  <table className="transaction-table">
-                    <thead>
-                      <tr>
-                        <th>Service</th>
-                        <th>Monthly Fee</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {cancelOptions.map((item, idx) => (
-                        <tr key={idx}>
-                          <td>{item.service}</td>
-                          <td>${item.monthlyFee.toFixed(2)}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
                 </div>
-              )}
-              {cancelOptions.length === 0 && (
-                <p>No estimated monthly fees available yet. Try uploading a CSV first.</p>
-              )}
-            </div>
-          )}
-        </div>
-      )}
+              </>
+            )}
 
-      {!loading && transactions.length === 0 && !error && (
-        <div className="status idle">
-          No results yet. Upload a CSV above to get started.
-        </div>
-      )}
+            {activeTab === "planner" && (
+              <>
+                <h2>✂️ Cancel Planner</h2>
+                <p>Select services to cancel and see your estimated savings:</p>
+                <div className="cancel-grid">
+                  {cancelOptions.map(({ service, monthlyFee }) => (
+                    <div key={service} className="cancel-item">
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={selectedCancellations.includes(service)}
+                          onChange={() => toggleCancellation(service)}
+                        />
+                        {service} - ${monthlyFee.toFixed(2)}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+                <div className="total-savings">
+                  📊 <strong>Current Monthly Expense:</strong> ${totalMonthlyFees.toFixed(2)}
+                  <br />
+                  ✅ <strong>Saved Monthly Expenses:</strong> ${estimatedSavings.toFixed(2)}
+                  <br />
+                  📅 <strong>Estimated Yearly Savings:</strong> ${estimatedYearlySavings.toFixed(2)}
+                </div>
+              </>
+            )}
 
-      <footer>
-        <small>Made with ❤️ in React. Your data never leaves your device.</small>
-      </footer>
+            {activeTab === "export" && (
+              <div className="export-tab">
+                <h2>📋 Export Subscriptions</h2>
+                <p>Export your detected subscriptions and estimated monthly fees to CSV for budgeting or sharing.</p>
+                <button className="export-button" onClick={downloadCSV}>⬇️ Download CSV</button>
+                {cancelOptions.length > 0 && (
+                  <div className="export-preview">
+                    <h3>📌 Preview:</h3>
+                    <table className="transaction-table">
+                      <thead>
+                        <tr>
+                          <th>Service</th>
+                          <th>Monthly Fee</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {cancelOptions.map((item, idx) => (
+                          <tr key={idx}>
+                            <td>{item.service}</td>
+                            <td>${item.monthlyFee.toFixed(2)}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+                {cancelOptions.length === 0 && (
+                  <p>No estimated monthly fees available yet. Try uploading a CSV first.</p>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+
+        {!loading && transactions.length === 0 && !error && (
+          <div className="status idle">
+            No results yet. Upload a CSV above to get started.
+          </div>
+        )}
+
+        <footer>
+          <small>Made with ❤️ in React. Your data never leaves your device.</small>
+        </footer>
+      </div>
+
+      <div className="sidebar right">
+        <AdsenseAd slot="YOUR_RIGHT_SLOT_ID_1" />
+        <AdsenseAd slot="YOUR_RIGHT_SLOT_ID_2" />
+      </div>
     </div>
   );
 }
