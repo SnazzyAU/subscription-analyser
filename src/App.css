@@ -1,0 +1,341 @@
+/* Reset & Base */
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #f6f7f9;
+  color: #333;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* App Container */
+.app {
+  max-width: 1200px;
+  width: 100%;
+  padding: 2rem;
+  box-sizing: border-box;
+  background: #f6f7f9;
+}
+
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.subtitle {
+  color: #666;
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+}
+
+/* Upload Button Section */
+.upload-section {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.file-label {
+  background: #4A90E2;
+  color: white;
+  padding: 0.85rem 1.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.file-label:hover {
+  background: #357ABD;
+}
+
+.file-label input[type="file"] {
+  display: none;
+}
+
+/* Filter Section */
+.filter-section {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.filter-section label {
+  margin-right: 0.5rem;
+  font-weight: bold;
+}
+
+.filter-section select {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+/* Status Messages */
+.status {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+
+.status.loading {
+  color: #FFA500;
+}
+
+.status.error {
+  color: #D32F2F;
+  background: #FFEBEE;
+  border: 1px solid #EF9A9A;
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+.status.idle {
+  color: #888;
+}
+
+/* Results Section */
+.results {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* Service Grid */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 999px) {
+  .service-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 599px) {
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Service Card */
+.service-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+}
+
+.service-card h3 {
+  margin-top: 0;
+  color: #4A90E2;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+}
+
+/* Transaction Table in Card */
+.transaction-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.transaction-table th,
+.transaction-table td {
+  text-align: left;
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
+  font-size: 1rem;
+}
+
+.transaction-table th {
+  background: #f0f4f8;
+  font-weight: bold;
+}
+
+/* Per-Service Total */
+.service-total {
+  text-align: right;
+  font-weight: bold;
+  margin-top: 1rem;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+/* Grand Total */
+.total {
+  margin-top: 2.5rem;
+  font-size: 1.3rem;
+  text-align: right;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+/* Extra Buttons Row */
+.button-row {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.button-row > button {
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  border: none;
+  margin: 0 0.5rem;
+  transition: background 0.3s;
+}
+
+/* Default (non-clear) buttons in button-row are blue */
+.button-row > button:not(.clear-button) {
+  background: #4A90E2;
+}
+
+.button-row > button:not(.clear-button):hover {
+  background: #357ABD;
+}
+
+/* Clear button is red */
+.clear-button {
+  background: #D32F2F;
+}
+
+.clear-button:hover {
+  background: #B71C1C;
+}
+
+.total-monthly-fees {
+  margin-top: 0.5em;
+  font-weight: normal;
+  color: #555;
+}
+
+.monthly-fee {
+  margin: 0.5em 0;
+  font-style: italic;
+  color: #555;
+}
+
+.tabs {
+  margin-bottom: 1em;
+}
+.tabs button {
+  margin-right: 1em;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  border: none;
+  background: #919191;
+  border-radius: 4px;
+}
+.tabs .active-tab {
+  background: #333333;
+  font-weight: bold;
+}
+
+.cancel-grid {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em;
+}
+.cancel-item {
+  margin-bottom: 0.5em;
+}
+.favorite-badge {
+  margin: 0.5em 0;
+  color: #f39c12;
+  background: #fff0d7;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.95em;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+
+
+
+.favorite-button {
+  margin-left: 1em;
+  padding: 0.2em 0.5em;
+  background: #f39c12;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.favorite-button.favorited {
+  background: #ee390c;
+  border-color: #f39c12;
+}
+
+.total-savings {
+  margin-top: 1em;
+  font-weight: bold;
+  color: #444;
+  line-height: 1.6em;
+}
+
+.monthly-fee {
+  margin: 0.5em 0;
+  font-style: italic;
+  color: #555;
+}
+
+.export-tab {
+  padding: 1em;
+  text-align: center;
+}
+
+.export-button {
+  padding: 0.5em 1em;
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  margin-top: 1em;
+}
+
+.export-button:hover {
+  background-color: #27ae60;
+}
+
+.export-preview {
+  margin-top: 2em;
+  text-align: left;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
