@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-import AdsenseAd from "./components/AdsenseAd";  // ✅ import your ad component
+import AdsenseAd from "./AdsenseAd";
 
 const SUBSCRIPTION_KEYWORDS = [
   "netflix", "prime video", "amznprimeau", "kogan mobile", "belong",
